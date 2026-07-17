@@ -1,0 +1,35 @@
+---
+title: Knowledge Bases API
+description: Manage knowledge bases and sources for agents.
+---
+
+# Knowledge Bases API
+
+Knowledge Bases allow you to organize and manage sources of information (FAQ, documents, etc.) that agents can reference during conversations.
+
+## Overview
+
+- Create knowledge bases to organize your content
+- Add sources (FAQ entries or files) to knowledge bases
+- Sources are automatically processed and indexed
+- Link knowledge bases to agents via `knowledge_source_ids`
+
+## Key concepts
+
+**Knowledge Base**: A container for related sources of information.
+
+**Source**: A single piece of content (FAQ entry or file) within a knowledge base. Sources are processed asynchronously and can be queried once their status is "ready".
+
+**Status states**:
+- `pending` - Source created, waiting to be processed
+- `processing` - Source is being ingested and indexed
+- `ready` - Source is available for agent queries
+- `failed` - Processing failed; check `error_message` for details
+
+## Rate limits
+
+Knowledge Bases API endpoints are rate-limited to 60 requests per minute per API key.
+
+## Required scope
+
+All Knowledge Bases endpoints require the `knowledge:read` or `knowledge:write` scope on your API key.

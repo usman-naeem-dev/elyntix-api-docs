@@ -1,0 +1,100 @@
+---
+title: GET /v1/calls
+description: List call sessions in the API key workspace.
+---
+
+# GET /v1/calls
+
+List call sessions that belong to the workspace attached to the API key.
+
+## Authentication
+
+Bearer API key required.
+
+## Required scope
+
+`calls:read`
+
+## Query parameters
+
+- `limit` - optional, defaults to `20`
+- `cursor` - optional pagination cursor
+- `status` - optional call status filter
+- `agentId` - optional agent filter
+- `type` - optional call type filter
+- `from` - optional ISO date filter
+- `to` - optional ISO date filter
+
+## Response
+
+```json
+{
+  "data": [
+    {
+      "id": "call_123",
+      "agentId": "agent_123",
+      "type": "browser_test",
+      "status": "completed",
+      "startedAt": "2026-06-01T12:00:00.000Z",
+      "endedAt": "2026-06-01T12:03:20.000Z",
+      "durationSeconds": 200,
+      "estimatedCost": 0.67,
+      "failureReason": null,
+      "createdAt": "2026-06-01T12:00:00.000Z",
+      "updatedAt": "2026-06-01T12:03:20.000Z"
+    }
+  ],
+  "pagination": {
+    "limit": 20,
+    "cursor": null
+  }
+}
+```
+
+## Errors
+
+```json
+{
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Invalid or missing API key.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+```json
+{
+  "error": {
+    "code": "FORBIDDEN",
+    "message": "API key does not have access to this resource.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+## cURL
+
+```bash
+curl "https://api.elyntix.ai/v1/calls?limit=20&status=completed" \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx"
+```
+
+## JavaScript / TypeScript
+
+```ts
+const url = new URL("https://api.elyntix.ai/v1/calls");
+url.searchParams.set("limit", "20");
+url.searchParams.set("status", "completed");
+
+const response = await fetch(url, {
+  headers: {
+    Authorization: `Bearer ${process.env.ELYNTIX_API_KEY}`,
+  },
+});
+
+const payload = await response.json();
+console.log(payload.pagination);
+```

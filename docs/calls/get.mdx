@@ -1,0 +1,84 @@
+---
+title: GET /v1/calls/:id
+description: Read a single call session.
+---
+
+# GET /v1/calls/:id
+
+Read one call session that belongs to the workspace attached to the API key.
+
+## Authentication
+
+Bearer API key required.
+
+## Required scope
+
+`calls:read`
+
+## Path parameters
+
+- `id` - call session ID
+
+## Response
+
+```json
+{
+  "data": {
+    "id": "call_123",
+    "agentId": "agent_123",
+    "type": "browser_test",
+    "status": "completed",
+    "startedAt": "2026-06-01T12:00:00.000Z",
+    "endedAt": "2026-06-01T12:03:20.000Z",
+    "durationSeconds": 200,
+    "estimatedCost": 0.67,
+    "failureReason": null,
+    "createdAt": "2026-06-01T12:00:00.000Z",
+    "updatedAt": "2026-06-01T12:03:20.000Z"
+  }
+}
+```
+
+## Errors
+
+```json
+{
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Call session not found.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+```json
+{
+  "error": {
+    "code": "FORBIDDEN",
+    "message": "API key does not have access to this resource.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+## cURL
+
+```bash
+curl https://api.elyntix.ai/v1/calls/call_123 \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx"
+```
+
+## JavaScript / TypeScript
+
+```ts
+const response = await fetch("https://api.elyntix.ai/v1/calls/call_123", {
+  headers: {
+    Authorization: `Bearer ${process.env.ELYNTIX_API_KEY}`,
+  },
+});
+
+const payload = await response.json();
+console.log(payload.data);
+```

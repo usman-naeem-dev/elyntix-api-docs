@@ -1,0 +1,84 @@
+---
+title: DELETE /v1/knowledge-bases/:id/sources/:sourceId
+description: Delete a source from a knowledge base.
+---
+
+# DELETE /v1/knowledge-bases/:id/sources/:sourceId
+
+Delete a single source from a knowledge base.
+
+## Authentication
+
+Bearer API key required.
+
+## Required scope
+
+`knowledge:write`
+
+## Path parameters
+
+- `id` - Knowledge base ID
+- `sourceId` - Knowledge source ID
+
+## Response
+
+```http
+204 No Content
+```
+
+## Notes
+
+- Deleting a source removes it from the knowledge base immediately.
+- Agents will no longer be able to reference this source in their conversations.
+- This action cannot be undone.
+
+## Errors
+
+```json
+{
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Knowledge base not found.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+```json
+{
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Knowledge source not found.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+## cURL
+
+```bash
+curl https://api.elyntix.ai/v1/knowledge-bases/kb_123/sources/src_456 \
+  -X DELETE \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx"
+```
+
+## JavaScript / TypeScript
+
+```ts
+const response = await fetch(
+  "https://api.elyntix.ai/v1/knowledge-bases/kb_123/sources/src_456",
+  {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${process.env.ELYNTIX_API_KEY}`,
+    },
+  }
+);
+
+if (response.status !== 204) {
+  const payload = await response.json();
+  console.error(payload);
+}
+```

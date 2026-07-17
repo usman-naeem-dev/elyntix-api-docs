@@ -1,0 +1,71 @@
+---
+title: Errors
+description: Public API error envelope and examples.
+---
+
+# Errors
+
+All public API errors use the same envelope.
+
+```json
+{
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Invalid or missing API key.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+## Common codes
+
+| Code | HTTP Status | Description |
+|------|-------------|-------------|
+| `VALIDATION_ERROR` | 422 | The request payload or query params are invalid |
+| `UNAUTHORIZED` | 401 | Missing, revoked, expired, or invalid API key |
+| `FORBIDDEN` | 403 | The API key does not have the required scope |
+| `NOT_FOUND` | 404 | The resource does not exist in the workspace |
+| `CONFLICT` | 409 | The resource already exists (e.g., duplicate name) |
+| `RATE_LIMITED` | 429 | The API key has exceeded its allowed request rate |
+| `PAYMENT_REQUIRED` | 402 | The workspace has insufficient credits |
+| `PROVIDER_UNAVAILABLE` | 503 | An upstream provider is unavailable |
+| `INTERNAL_ERROR` | 500 | An unexpected server error occurred |
+
+## Example responses
+
+Validation error:
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid request payload.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+Insufficient permissions:
+```json
+{
+  "error": {
+    "code": "FORBIDDEN",
+    "message": "API key does not have access to this resource.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+Rate limit exceeded:
+```json
+{
+  "error": {
+    "code": "RATE_LIMITED",
+    "message": "Rate limit exceeded.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```

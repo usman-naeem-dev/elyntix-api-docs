@@ -1,0 +1,56 @@
+---
+title: Authentication
+description: Bearer API key authentication for the public API.
+---
+
+# Authentication
+
+The public API uses Bearer API key authentication.
+
+```http
+Authorization: Bearer elyntix_sk_live_xxxxx
+```
+
+## Key modes
+
+API keys are available in two modes:
+
+| Mode | Prefix | Purpose |
+|------|--------|---------|
+| **Test** | `elyntix_sk_test_` | Sandbox environment, free, no credits consumed |
+| **Live** | `elyntix_sk_live_` | Production environment, against your live account |
+
+Always test your integration with test keys before going live.
+
+## Scopes
+
+API keys can be granted fine-grained permissions via scopes. A key can have any combination of the following:
+
+| Scope | Access |
+|-------|--------|
+| `agents:read` | List and retrieve agents |
+| `agents:write` | Create, update, delete agents |
+| `calls:read` | List and retrieve calls |
+| `calls:write` | Create and manage calls |
+| `knowledge:read` | List and retrieve knowledge bases and sources |
+| `knowledge:write` | Create, update, delete knowledge bases and sources |
+| `billing:read` | View billing and usage data |
+| `workspace:admin` | Manage workspace settings and team members |
+| `*` | Full access to all scopes |
+
+If a key lacks the required scope for an endpoint, the API returns a `FORBIDDEN` error.
+
+## Important rules
+
+- API keys are workspace-scoped.
+- The full secret is shown only once after creation.
+- Never expose secret keys in frontend or browser apps.
+- Use server-side requests only.
+- Revoke a key immediately if it may have been exposed.
+
+## Example
+
+```bash
+curl https://api.elyntix.ai/v1/agents \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx"
+```

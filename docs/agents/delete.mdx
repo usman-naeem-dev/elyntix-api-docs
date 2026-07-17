@@ -1,0 +1,63 @@
+---
+title: DELETE /v1/agents/:id
+description: Delete an agent in the API key workspace.
+---
+
+# DELETE /v1/agents/:id
+
+Delete an agent from the workspace attached to the API key.
+
+## Authentication
+
+Bearer API key required.
+
+## Required scope
+
+`agents:write`
+
+## Path parameters
+
+- `id` - agent ID
+
+## Response
+
+```http
+204 No Content
+```
+
+## Errors
+
+```json
+{
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Agent not found.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+## cURL
+
+```bash
+curl https://api.elyntix.ai/v1/agents/agent_123 \
+  -X DELETE \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx"
+```
+
+## JavaScript / TypeScript
+
+```ts
+const response = await fetch("https://api.elyntix.ai/v1/agents/agent_123", {
+  method: "DELETE",
+  headers: {
+    Authorization: `Bearer ${process.env.ELYNTIX_API_KEY}`,
+  },
+});
+
+if (response.status !== 204) {
+  const payload = await response.json();
+  console.error(payload);
+}
+```

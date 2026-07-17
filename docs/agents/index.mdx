@@ -1,0 +1,25 @@
+---
+title: Agents API
+description: Public agent management endpoints.
+---
+
+# Agents API
+
+The Agents API lets you list, create, update, inspect, delete, and start browser test calls for agents.
+
+## Endpoints
+
+- `GET /v1/agents`
+- `POST /v1/agents`
+- `GET /v1/agents/:id`
+- `PATCH /v1/agents/:id`
+- `DELETE /v1/agents/:id`
+- `POST /v1/agents/:id/test-call`
+
+## Required scopes
+
+- Read access: `agents:read`
+- Write access: `agents:write`
+- Browser test calls: `agents:write` and `calls:write`
+
+Each endpoint page below includes the request, response, error examples, and code samples.

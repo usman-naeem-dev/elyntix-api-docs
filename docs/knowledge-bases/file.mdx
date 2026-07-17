@@ -1,0 +1,182 @@
+---
+title: POST /v1/knowledge-bases/:id/sources/file
+description: Upload a file as a source to a knowledge base.
+---
+
+# POST /v1/knowledge-bases/:id/sources/file
+
+Upload a file (PDF, DOCX, TXT, etc.) as a source to a knowledge base.
+
+## Authentication
+
+Bearer API key required.
+
+## Required scope
+
+`knowledge:write`
+
+## Path parameters
+
+- `id` - Knowledge base ID
+
+## Request body
+
+Multipart form data with:
+
+- `file` (required) - The file to upload. Maximum size: 20 MB
+- `title` (optional) - A name for this source. Defaults to the filename
+
+## Supported file types
+
+- PDF (.pdf)
+- Word documents (.docx, .doc)
+- Plain text (.txt)
+- Markdown (.md)
+- CSV (.csv)
+
+## Response
+
+The source is created with status `pending`. Processing begins immediately, including text extraction and indexing. Once status reaches `ready`, the source is available to agents. Processing time depends on file size (typically 10-60 seconds).
+
+```json
+{
+  "data": {
+    "_id": "src_789",
+    "knowledge_base_id": "kb_123",
+    "type": "file",
+    "status": "pending",
+    "error_message": null,
+    "title": "User Guide",
+    "faq_content": null,
+    "file": {
+      "filename": "user-guide.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 2048576
+    },
+    "chunk_count": 0,
+    "char_count": 0,
+    "created_at": "2026-06-01T12:00:00.000Z",
+    "updated_at": "2026-06-01T12:00:00.000Z"
+  }
+}
+```
+
+## Processing
+
+After upload:
+
+1. File is stored securely
+2. Text is extracted
+3. Content is split into chunks
+4. Embeddings are generated for each chunk
+5. Status updates to `ready` when complete
+
+If processing fails (e.g., unsupported file format, corrupt file), the source status becomes `failed` with an `error_message`.
+
+## Polling for completion
+
+```ts
+let source = await getSource(kb_id, src_id);
+while (source.status === "pending" || source.status === "processing") {
+  await sleep(1000);
+  source = await getSource(kb_id, src_id);
+}
+
+if (source.status === "failed") {
+  console.error("Processing failed:", source.error_message);
+}
+```
+
+## Errors
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "A file is required.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "File exceeds the 20MB size limit",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+```json
+{
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Knowledge base not found.",
+    "requestId": "req_abc123def456",
+    "details": null
+  }
+}
+```
+
+## cURL
+
+```bash
+curl https://api.elyntix.ai/v1/knowledge-bases/kb_123/sources/file \
+  -X POST \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx" \
+  -F "file=@user-guide.pdf" \
+  -F "title=User Guide"
+```
+
+## JavaScript / TypeScript
+
+```ts
+const formData = new FormData();
+const fileInput = document.querySelector("input[type='file']");
+formData.append("file", fileInput.files[0]);
+formData.append("title", "User Guide");
+
+const response = await fetch(
+  "https://api.elyntix.ai/v1/knowledge-bases/kb_123/sources/file",
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.ELYNTIX_API_KEY}`,
+    },
+    body: formData,
+  }
+);
+
+const payload = await response.json();
+console.log(payload.data);
+```
+
+## Node.js example
+
+```ts
+import fs from "fs";
+import FormData from "form-data";
+
+const form = new FormData();
+form.append("file", fs.createReadStream("user-guide.pdf"));
+form.append("title", "User Guide");
+
+const response = await fetch(
+  "https://api.elyntix.ai/v1/knowledge-bases/kb_123/sources/file",
+  {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.ELYNTIX_API_KEY}`,
+      ...form.getHeaders(),
+    },
+    body: form,
+  }
+);
+
+const payload = await response.json();
+console.log(payload.data);
+```

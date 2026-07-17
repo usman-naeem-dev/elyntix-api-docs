@@ -1,0 +1,49 @@
+---
+title: Quickstart
+description: Start using the public /v1 API in minutes.
+---
+
+# Quickstart
+
+## 1. Create an API key
+
+From the dashboard, create a workspace-scoped API key. Copy the full key once and store it securely.
+
+## 2. Call `GET /v1/agents`
+
+```bash
+curl https://api.elyntix.ai/v1/agents \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx"
+```
+
+## 3. Create an agent
+
+```bash
+curl https://api.elyntix.ai/v1/agents \
+  -X POST \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Support voice agent",
+    "instructions": "Answer product questions and route billing issues to support.",
+    "status": "draft",
+    "type": "inbound"
+  }'
+```
+
+## 4. Start a browser test call
+
+```bash
+curl https://api.elyntix.ai/v1/agents/agent_123/test-call \
+  -X POST \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx"
+```
+
+## 5. Read call logs
+
+```bash
+curl https://api.elyntix.ai/v1/calls \
+  -H "Authorization: Bearer elyntix_sk_live_xxxxx"
+```
+
+Keep requests server-side. If you need to call the API from a browser app, proxy the request through your backend.

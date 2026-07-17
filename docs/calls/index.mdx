@@ -1,0 +1,21 @@
+---
+title: Calls API
+description: Read browser call sessions and end active test calls.
+---
+
+# Calls API
+
+The Calls API exposes workspace-scoped call sessions and browser test call management.
+
+## Endpoints
+
+- `GET /v1/calls`
+- `GET /v1/calls/:id`
+- `POST /v1/calls/:id/end`
+
+## Required scopes
+
+- Read access: `calls:read`
+- End browser test call: `calls:write`
+
+Calls are always scoped to the workspace attached to the API key.
