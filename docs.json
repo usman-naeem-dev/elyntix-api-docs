@@ -24,8 +24,8 @@
       },
       {
         "group": "Agents API",
-        "root": "agents/index",
         "pages": [
+          "agents/index",
           "agents/get",
           "agents/create",
           "agents/read",
@@ -36,8 +36,8 @@
       },
       {
         "group": "Calls API",
-        "root": "calls/index",
         "pages": [
+          "calls/index",
           "calls/list",
           "calls/get",
           "calls/end"
@@ -45,8 +45,8 @@
       },
       {
         "group": "Knowledge Bases API",
-        "root": "knowledge-bases/index",
         "pages": [
+          "knowledge-bases/index",
           "knowledge-bases/list",
           "knowledge-bases/create",
           "knowledge-bases/get",
