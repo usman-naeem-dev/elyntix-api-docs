@@ -10,51 +10,53 @@
   "colors": {
     "primary": "#0FA8B0"
   },
-  "navigation": [
-    {
-      "group": "Getting started",
-      "pages": [
-        "index",
-        "quickstart",
-        "authentication",
-        "errors",
-        "rate-limits"
-      ]
-    },
-    {
-      "group": "Agents API",
-      "pages": [
-        "agents/index",
-        "agents/get",
-        "agents/create",
-        "agents/read",
-        "agents/update",
-        "agents/delete",
-        "agents/test-call"
-      ]
-    },
-    {
-      "group": "Calls API",
-      "pages": [
-        "calls/index",
-        "calls/list",
-        "calls/get",
-        "calls/end"
-      ]
-    },
-    {
-      "group": "Knowledge Bases API",
-      "pages": [
-        "knowledge-bases/index",
-        "knowledge-bases/list",
-        "knowledge-bases/create",
-        "knowledge-bases/get",
-        "knowledge-bases/update",
-        "knowledge-bases/delete",
-        "knowledge-bases/faq",
-        "knowledge-bases/file",
-        "knowledge-bases/delete-source"
-      ]
-    }
-  ]
+  "navigation": {
+    "groups": [
+      {
+        "group": "Getting started",
+        "pages": [
+          "index",
+          "quickstart",
+          "authentication",
+          "errors",
+          "rate-limits"
+        ]
+      },
+      {
+        "group": "Agents API",
+        "pages": [
+          "agents/index",
+          "agents/get",
+          "agents/create",
+          "agents/read",
+          "agents/update",
+          "agents/delete",
+          "agents/test-call"
+        ]
+      },
+      {
+        "group": "Calls API",
+        "pages": [
+          "calls/index",
+          "calls/list",
+          "calls/get",
+          "calls/end"
+        ]
+      },
+      {
+        "group": "Knowledge Bases API",
+        "pages": [
+          "knowledge-bases/index",
+          "knowledge-bases/list",
+          "knowledge-bases/create",
+          "knowledge-bases/get",
+          "knowledge-bases/update",
+          "knowledge-bases/delete",
+          "knowledge-bases/faq",
+          "knowledge-bases/file",
+          "knowledge-bases/delete-source"
+        ]
+      }
+    ]
+  }
 }
