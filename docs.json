@@ -15,46 +15,46 @@
       {
         "group": "Getting started",
         "pages": [
-          "index",
-          "quickstart",
-          "authentication",
-          "errors",
-          "rate-limits"
+          "docs/index",
+          "docs/quickstart",
+          "docs/authentication",
+          "docs/errors",
+          "docs/rate-limits"
         ]
       },
       {
         "group": "Agents API",
         "pages": [
-          "agents/index",
-          "agents/get",
-          "agents/create",
-          "agents/read",
-          "agents/update",
-          "agents/delete",
-          "agents/test-call"
+          "docs/agents/index",
+          "docs/agents/get",
+          "docs/agents/create",
+          "docs/agents/read",
+          "docs/agents/update",
+          "docs/agents/delete",
+          "docs/agents/test-call"
         ]
       },
       {
         "group": "Calls API",
         "pages": [
-          "calls/index",
-          "calls/list",
-          "calls/get",
-          "calls/end"
+          "docs/calls/index",
+          "docs/calls/list",
+          "docs/calls/get",
+          "docs/calls/end"
         ]
       },
       {
         "group": "Knowledge Bases API",
         "pages": [
-          "knowledge-bases/index",
-          "knowledge-bases/list",
-          "knowledge-bases/create",
-          "knowledge-bases/get",
-          "knowledge-bases/update",
-          "knowledge-bases/delete",
-          "knowledge-bases/faq",
-          "knowledge-bases/file",
-          "knowledge-bases/delete-source"
+          "docs/knowledge-bases/index",
+          "docs/knowledge-bases/list",
+          "docs/knowledge-bases/create",
+          "docs/knowledge-bases/get",
+          "docs/knowledge-bases/update",
+          "docs/knowledge-bases/delete",
+          "docs/knowledge-bases/faq",
+          "docs/knowledge-bases/file",
+          "docs/knowledge-bases/delete-source"
         ]
       }
     ]
